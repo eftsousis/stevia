@@ -64,7 +64,7 @@
 	</distributionManagement>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/ptsiakos77/stevia.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/Workable/stevia.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
