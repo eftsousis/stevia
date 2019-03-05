@@ -1,8 +1,6 @@
 stevia <img src="https://raw.github.com/persado/stevia/master/doc/stevia-logo.png" align="right" width="80">
 ======
 
-Build Status of 0.9.6-SNAPSHOT [![Status](https://travis-ci.org/persado/stevia.png?branch=master)](https://travis-ci.org/persado/stevia) 
-
 ## Stevia Quick Start (10 minutes) guide
 
 Our 10-minutes guide for using Stevia is in our [wiki](https://github.com/persado/stevia/wiki/Stevia-10-minute-Quick-Start). Read on and start coding!
@@ -33,43 +31,11 @@ The following features are supported in the current Stevia build (new features h
     * Postconditions - similar to @Precondition but after the @Test method.
 * lots of other minor features
 
-## Stevia Help and Javadoc
+## Release Management - Maven release plugin
 
-You can browse our javadoc via this [link](http://persado.github.io/stevia/).
-Our [wiki](https://github.com/persado/stevia/wiki) contains topics of interest, let us know (via an issue) if you need clarifications. We're here to help!
+- mvn clean -Darguments=-DskipTests release:prepare
+- mvn clean -Darguments=-DskipTests release:perform
 
-### Latest in maven repositories
-#### Release
-```
-<dependency>
-  <groupId>com.persado.oss.quality.stevia</groupId>
-  <artifactId>stevia-core</artifactId>
-  <version>0.9.5</version>
-</dependency>
-```
-#### Cutting edge
-```
-<dependency>
-  <groupId>com.persado.oss.quality.stevia</groupId>
-  <artifactId>stevia-core</artifactId>
-  <version>0.9.6-SNAPSHOT</version>
-</dependency>
-```
-To work with the cutting-edge version, don't forget to add the following to your pom.xml:
-```
-<repositories>
-  <repository>
-    <id>sonatype-nexus-snapshots</id>
-    <name>OSS Sonatype Snapshot Repository</name>
-    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-  </repository>
-</repositories>	
-```
-
-* * *
-
-### Who is Persado <img alt="Persado" width="75" align="right" src="http://www.persado.com/templates/youandigraphics/images/logo.png">
-Persado programmatically uncovers the language and emotions that make people buy. Its unique technology is powered by Natural Language Processing and advanced statistical algorithms. Working with leading global brands such as American Express, Esurance, McAfee, SurveyMonkey, Verizon Wireless and leading global Mobile Operators, Persado systematically delivers better marketing messages across digital channels. 
-
--------
-Push to trigger build in codeship
+If you changed your mind, or something got wrong:
+- mvn release:rollback
+- mvn release:clean
