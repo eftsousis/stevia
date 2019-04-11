@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.persado.oss.quality.stevia</groupId>
 	<artifactId>stevia-core</artifactId>
-	<version>1.3.4-SNAPSHOT</version>
+	<version>1.3.4</version>
 	<packaging>jar</packaging>
 
 	<name>Stevia QA Framework - Core</name>
@@ -52,12 +52,12 @@
 
 	<distributionManagement>
 		<repository>
-			<id>jfrog-release</id>
+			<id>central</id>
 			<name>workable-releases</name>
 			<url>https://workable.jfrog.io/workable/maven-local</url>
 		</repository>
 		<snapshotRepository>
-			<id>jfrog-snapshot</id>
+			<id>snapshots</id>
 			<name>workable-snapshots</name>
 			<url>https://workable.jfrog.io/workable/maven-local</url>
 		</snapshotRepository>
