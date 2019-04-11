@@ -52,14 +52,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>aws-release</id>
-			<name>AWS Release Repository</name>
-			<url>s3://workable-private-repo/release</url>
+			<id>jfrog-release</id>
+			<name>workable-releases</name>
+			<url>https://workable.jfrog.io/workable/maven-local</url>
 		</repository>
 		<snapshotRepository>
-			<id>aws-snapshot</id>
-			<name>AWS Snapshot Repository</name>
-			<url>s3://workable-private-repo/snapshot</url>
+			<id>jfrog-snapshot</id>
+			<name>workable-snapshots</name>
+			<url>https://workable.jfrog.io/workable/maven-local</url>
 		</snapshotRepository>
 	</distributionManagement>
 
