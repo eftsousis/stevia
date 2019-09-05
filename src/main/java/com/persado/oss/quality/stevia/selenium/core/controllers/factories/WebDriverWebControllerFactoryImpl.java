@@ -214,10 +214,6 @@ public class WebDriverWebControllerFactoryImpl implements WebControllerFactory {
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("test-type");
-
-        //https://bugs.chromium.org/p/chromedriver/issues/detail?id=2758#c15
-        options.addArguments("--disable-features=site-per-process");
-
         //Added support for headless chrome mode
         if (SteviaContext.getParam("headlessChrome") != null && SteviaContext.getParam("headlessChrome").equals("true")) {
             options.addArguments("--headless");
