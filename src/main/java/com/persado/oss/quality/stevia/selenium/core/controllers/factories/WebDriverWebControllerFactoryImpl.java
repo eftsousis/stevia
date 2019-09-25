@@ -69,7 +69,6 @@ import java.util.concurrent.TimeoutException;
 
 public class WebDriverWebControllerFactoryImpl implements WebControllerFactory {
     private static final Logger LOG = LoggerFactory.getLogger(WebDriverWebControllerFactoryImpl.class);
-
     @Override
     public WebController initialize(ApplicationContext context, WebController controller) {
         WebDriverWebController wdController = (WebDriverWebController) controller;
@@ -114,7 +113,11 @@ public class WebDriverWebControllerFactoryImpl implements WebControllerFactory {
                     options.addArguments("--headless");
                     options.addArguments("--disable-gpu");
                 }
-                if (SteviaContext.getParam("windowSize") != null) {
+
+                if (!StringUtils.isEmpty(SteviaContext.getParam("platformName").isEmpty())){
+                    options.setCapability("platformName", SteviaContext.getParam("platformName"));
+                }
+                if (!StringUtils.isEmpty(SteviaContext.getParam("windowSize"))) {
                     options.addArguments("--window-size=" + SteviaContext.getParam("windowSize").replace("x", ","));
                     LOG.info("Setting window size to " + SteviaContext.getParam("windowSize"));
                 } else {
