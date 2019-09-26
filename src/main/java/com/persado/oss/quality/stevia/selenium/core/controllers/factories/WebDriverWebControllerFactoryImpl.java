@@ -114,7 +114,7 @@ public class WebDriverWebControllerFactoryImpl implements WebControllerFactory {
                     options.addArguments("--disable-gpu");
                 }
 
-                if (!StringUtils.isEmpty(SteviaContext.getParam("platformName").isEmpty())){
+                if (!StringUtils.isEmpty(SteviaContext.getParam("platformName"))){
                     options.setCapability("platformName", SteviaContext.getParam("platformName"));
                 }
                 if (!StringUtils.isEmpty(SteviaContext.getParam("windowSize"))) {
