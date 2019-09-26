@@ -43,6 +43,7 @@ import com.persado.oss.quality.stevia.selenium.core.WebController;
 import com.persado.oss.quality.stevia.selenium.core.controllers.SteviaWebControllerFactory;
 import com.persado.oss.quality.stevia.selenium.listeners.ConditionsListener;
 import com.persado.oss.quality.stevia.selenium.listeners.ControllerMaskingListener;
+import org.openqa.selenium.Capabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
@@ -91,7 +92,6 @@ public class SteviaTestBase extends AbstractTestNGSpringContextTests implements 
     /**
      * Extends the TestNG method to prepare the Spring contexts for parallel tests.
      *     * As seen at {@link http://goo.gl/g8QT2}
-
      * @throws Exception the exception
      */
     @BeforeSuite(alwaysRun = true)
@@ -117,7 +117,7 @@ public class SteviaTestBase extends AbstractTestNGSpringContextTests implements 
         propNames.forEach(p ->
                 parameters.put(p, System.getProperty(p)));
 
-        //if the suite needs RC server, we start it here 
+        //if the suite needs RC server, we start it here
         if (parameters.get("driverType").compareTo("webdriver") != 0 && parameters.get("debugging").compareTo(TRUE) == 0 && !isRCStarted) {
             startRCServer();
         }
@@ -137,7 +137,6 @@ public class SteviaTestBase extends AbstractTestNGSpringContextTests implements 
 
         // user code
         suiteInitialisation(testContext);
-
         if (initContext) {
             initializeStevia(parameters);
         }
@@ -146,6 +145,7 @@ public class SteviaTestBase extends AbstractTestNGSpringContextTests implements 
             //stevia context clean
             SteviaContext.clean();
         }
+        SteviaContext.registerParameters(SteviaContextSupport.getParameters(parameters));
         STEVIA_TEST_BASE_LOG.warn("*************************************************************************************");
         STEVIA_TEST_BASE_LOG.warn("*** SUITE initialisation phase END                                                ***");
         STEVIA_TEST_BASE_LOG.warn("*************************************************************************************");
@@ -199,11 +199,6 @@ public class SteviaTestBase extends AbstractTestNGSpringContextTests implements 
         testInitialisation(testContext);
         Map<String, String> parameters = testContext.getCurrentXmlTest().getParameters();
         testContext.getCurrentXmlTest().setParallel(XmlSuite.ParallelMode.getValidParallel(parameters.get("parallelSetup")));
-
-        // we check here **again** if the test needs the RC server and start it.
-        if (parameters.get("driverType").compareTo("webdriver") != 0 && parameters.get("debugging").compareTo(TRUE) == 0 && !isRCStarted) {
-            startRCServer();
-        }
         String parallelSetup = testContext.getSuite().getParallel();
         if (parallelSetup == null || parallelSetup.isEmpty() || parallelSetup.equalsIgnoreCase("false") || parallelSetup.equalsIgnoreCase("none") || parallelSetup.equalsIgnoreCase("tests")) {
 

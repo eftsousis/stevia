@@ -39,7 +39,9 @@ package com.persado.oss.quality.stevia.selenium.core;
 import com.persado.oss.quality.stevia.annotations.AnnotationsHelper;
 import com.persado.oss.quality.stevia.selenium.core.controllers.WebDriverWebController;
 import com.persado.oss.quality.stevia.testng.Verify;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -86,6 +88,11 @@ public class SteviaContext {
          */
         private Map<String, String> paramsRegistry;
 
+        /**
+         * The desired capoabilities
+         */
+        private Capabilities capabilities;
+
         private int waitForPageToLoad = 30;
         private int waitForAjaxComplete = 20000;
         private int waitForElement = 10;
@@ -114,6 +121,7 @@ public class SteviaContext {
             if (paramsRegistry != null) {
                 paramsRegistry.clear();
             }
+            capabilities = null;
             context = null;
             state = null;
             LOG.info("Context closed, controller shutdown");
@@ -223,6 +231,16 @@ public class SteviaContext {
         LOG.warn("Thread {} just registered", new Object[]{Thread.currentThread().getName()});
     }
 
+    public static void registerCapabilities(Capabilities caps) {
+        Capabilities capabilities = innerContext.get().capabilities;
+
+        if (capabilities == null) {
+            innerContext.get().capabilities = new DesiredCapabilities();
+        }
+        innerContext.get().capabilities.merge(caps);
+        LOG.warn("Thread {} just registered", new Object[]{Thread.currentThread().getName()});
+    }
+
     /**
      * get a parameter from the registry.
      *
@@ -231,6 +249,11 @@ public class SteviaContext {
      */
     public static String getParam(String paramName) {
         return innerContext.get().paramsRegistry.get(paramName);
+    }
+
+
+    public static Capabilities getCapabilities() {
+        return innerContext.get().capabilities;
     }
 
     /**
