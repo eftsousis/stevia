@@ -90,6 +90,7 @@ public class WantedAppiumCapabilities {
             KEY_ALIAS,
             KEY_PASSWORD,
             ANDROID_COVERAGE,
+            AUTO_GRANT_PERMISSIONS,
             "skipUnlock"
     ).collect(Collectors.toList());
 

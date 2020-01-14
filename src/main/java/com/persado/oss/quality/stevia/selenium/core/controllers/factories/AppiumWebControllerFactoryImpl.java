@@ -36,6 +36,7 @@ package com.persado.oss.quality.stevia.selenium.core.controllers.factories;
  * #L%
  */
 
+import com.google.common.collect.ImmutableMap;
 import com.persado.oss.quality.stevia.selenium.core.SteviaContext;
 import com.persado.oss.quality.stevia.selenium.core.WebController;
 import com.persado.oss.quality.stevia.selenium.core.controllers.AppiumWebController;
@@ -191,13 +192,12 @@ public class AppiumWebControllerFactoryImpl implements WebControllerFactory {
         if (variableExists(MobileCapabilityType.NEW_COMMAND_TIMEOUT)) {
             capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Integer.parseInt(SteviaContext.getParam(MobileCapabilityType.NEW_COMMAND_TIMEOUT)));
         }
-
         setCapabilitiesInList(capabilities, WantedAppiumCapabilities.COMMON_CAPABILITIES);
     }
 
     private void setupAndroidCapabilities(DesiredCapabilities capabilities) {
+        capabilities.setCapability("appium:chromeOptions", ImmutableMap.of("w3c", false));
         capabilities.setCapability(AndroidMobileCapabilityType.RECREATE_CHROME_DRIVER_SESSIONS, true);
-
         setCapabilitiesInList(capabilities, WantedAppiumCapabilities.ANDROID_DEFAULT_CAPABILITIES);
         if (variableExists("skipUnlock")) {
             capabilities.setCapability("skipUnlock", SteviaContext.getParam("skipUnlock"));
