@@ -1,16 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.persado.oss.quality.stevia</groupId>
 	<artifactId>stevia-core</artifactId>
-	<version>1.3.8-SNAPSHOT</version>
+	<version>0.9.22-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
 	<name>Stevia QA Framework - Core</name>
 	<description>Stevia is a QA Framework unifying the Selenium-RC and Webdriver APIs under
-		a common uniform API that handles all differences. Using Stevia allows the QA Engineer
-		to seamlessly switch between Selenium-RC and Webdriver, enhance by adding custom webdrivers
-		and other artifacts. By design both drivers play under Selenium Grid and support extended
-		reporting functionality via ReportNG, including remote screenshots.</description>
+	a common uniform API that handles all differences. Using Stevia allows the QA Engineer
+	to seamlessly switch between Selenium-RC and Webdriver, enhance by adding custom webdrivers
+	and other artifacts. By design both drivers play under Selenium Grid and support extended 
+	reporting functionality via ReportNG, including remote screenshots.</description>
 
 	<url>http://www.persado.com</url>
 	<inceptionYear>2013</inceptionYear>
@@ -39,34 +45,32 @@
 				<role>QA Engineer</role>
 			</roles>
 		</developer>
-		<developer>
-			<name>Panagiotis Tsiakos</name>
-			<id>tsak77</id>
-			<email>panagiotis.tsiakos@persado.com</email>
-			<organization>Persado</organization>
-			<roles>
-				<role>QA Engineer</role>
-			</roles>
-		</developer>
 	</developers>
-
-	<distributionManagement>
-		<repository>
-			<id>central</id>
-			<name>workable-releases</name>
-			<url>https://workable.jfrog.io/workable/maven-local</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<name>workable-snapshots</name>
-			<url>https://workable.jfrog.io/workable/maven-local</url>
-		</snapshotRepository>
-	</distributionManagement>
-
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/persado/stevia/issues</url>
+	</issueManagement>
 	<scm>
-		<developerConnection>scm:git:https://github.com/Workable/stevia.git</developerConnection>
+		<url>https://github.com/persado/stevia</url>
+		<connection>scm:git:git@github.com:persado/stevia.git</connection>
+		<developerConnection>scm:git:git@github.com:persado/stevia.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
+	<!-- -->
+	<distributionManagement>
+		<repository>
+			<id>sonatype-nexus-releases</id>
+			<name>OSS Sonatype Release Staging Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>OSS Sonatype Snapshot Repository</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<pluginManagement>
@@ -76,13 +80,13 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.5</version>
+					<version>3.0.0</version>
 				</plugin>
 				<!-- Compiles Java sources -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
+					<version>3.6.1</version>
 					<inherited>true</inherited>
 					<configuration>
 						<source>1.8</source>
@@ -93,26 +97,18 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.7</version>
+					<version>2.8.2</version>
 				</plugin>
 				<!-- Build a JAR from the current project -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>2.4</version>
+					<version>3.0.2</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5.3</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>3.0.1</version>
-					<configuration>
-						<failOnError>false</failOnError>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -120,21 +116,8 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.14</version>
+				<version>2.19.1</version>
 				<!-- <configuration> <skipTests>false</skipTests> </configuration> -->
 				<executions>
 					<execution>
@@ -152,7 +135,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>1.6</version>
+				<version>1.12</version>
 				<configuration>
 					<verbose>false</verbose>
 					<organizationName>Persado Intellectual Property Limited</organizationName>
@@ -188,15 +171,21 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- <plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+        			<artifactId>maven-gpg-plugin</artifactId>
+        			<version>1.6</version>
+        			<executions>
+          			<execution>
+            				<id>sign-artifacts</id>
+            				<phase>verify</phase>
+            				<goals>
+              					<goal>sign</goal>
+            				</goals>
+          			</execution>
+        			</executions>
+      			</plugin> -->
 		</plugins>
-
-		<extensions>
-			<extension>
-				<groupId>org.springframework.build</groupId>
-				<artifactId>aws-maven</artifactId>
-				<version>5.0.0.RELEASE</version>
-			</extension>
-		</extensions>
 	</build>
 
 	<dependencies>
@@ -218,16 +207,9 @@
 			<version>0.3.0</version>
 		</dependency>
 
+	
 
-
-		<!-- Jetty HTTP Client -->
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-client</artifactId>
-			<version>8.1.8.v20121106</version>
-		</dependency>
-
-		<!-- Suite of Java SSH applications providing a Java SSH API, SSH Terminal,
+		<!-- Suite of Java SSH applications providing a Java SSH API, SSH Terminal, 
 			SSH secured VNC client, SFTP client and SSH Daemon -->
 		<dependency>
 			<groupId>sshtools</groupId>
@@ -239,11 +221,11 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.9.13.6</version>
+			<version>6.4</version>
 		</dependency>
 
-		<!-- ReportNG, a simple HTML reporting plug-in for the TestNG unit-testing
-			framework Usually in our project newer TestNG version is used, so that ReportNG
+		<!-- ReportNG, a simple HTML reporting plug-in for the TestNG unit-testing 
+			framework Usually in our project newer TestNG version is used, so that ReportNG 
 			dependency should be excluded -->
 		<dependency>
 			<groupId>org.uncommons</groupId>
@@ -269,30 +251,19 @@
 			<version>3.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>io.appium</groupId>
-			<artifactId>java-client</artifactId>
-			<version>${appium.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>23.0</version>
-		</dependency>
-
 		<!-- Selenium Server Standalone -->
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
+        	<groupId>org.seleniumhq.selenium</groupId>
+        	<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>com.opera</groupId>
-			<artifactId>operadriver</artifactId>
-			<version>1.5</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>3.3.1</version>
 		</dependency>
+
+
 
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -305,7 +276,7 @@
 
 		<!-- Core utilities used by other modules. -->
 		<dependency>
-			<groupId>org.springframework</groupId>
+                <groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
@@ -324,7 +295,7 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core,
+		<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core, 
 			spring-beans) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -332,7 +303,7 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<!-- Application Context (depends on spring-core, spring-expression, spring-aop,
+		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
 			spring-beans) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -340,7 +311,7 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<!-- Various Application Context utilities, including EhCache, JavaMail,
+		<!-- Various Application Context utilities, including EhCache, JavaMail, 
 			Quartz, and Freemarker integration -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -348,7 +319,7 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans,
+		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
 			spring-aop, spring-context) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -356,11 +327,18 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context,
+		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
 			spring-tx) -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<!-- spring mvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
 
@@ -384,8 +362,8 @@
 
 
 
-		<!-- Support for testing Spring applications with tools such as JUnit and
-			TestNG This artifact is generally always defined with a 'test' scope for
+		<!-- Support for testing Spring applications with tools such as JUnit and 
+			TestNG This artifact is generally always defined with a 'test' scope for 
 			the integration testing framework and unit testing stubs -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -422,16 +400,43 @@
 			<artifactId>mqtt-client</artifactId>
 			<version>1.3</version>
 		</dependency>
+
+		<!-- apparently this fixes 2.46.0 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
 	</dependencies>
 
 
 	<!-- Shared version number properties -->
 	<properties>
-		<org.springframework.version>5.0.2.RELEASE</org.springframework.version>
-		<selenium.version>3.12.0</selenium.version>
-		<appium.version>6.1.0</appium.version>
+		<org.springframework.version>3.2.14.RELEASE</org.springframework.version>
+		<selenium.version>3.8.1</selenium.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.scm.id>stevia</project.scm.id>
 	</properties>
-
+	<profiles>
+    		<profile>
+        		<id>disable-java8-doclint</id>
+        		<activation>
+            			<jdk>[1.8,)</jdk>
+        		</activation>
+        		<properties>
+            			<additionalparam>-Xdoclint:none</additionalparam>
+        		</properties>
+    		</profile>
+	</profiles>
 </project>

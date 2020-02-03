@@ -1,10 +1,10 @@
-package com.persado.oss.quality.stevia.selenium.core;
+package com.persado.oss.quality.stevia.network.http;
 
 /*
  * #%L
  * Stevia QA Framework - Core
  * %%
- * Copyright (C) 2013 - 2016 Persado Intellectual Property Limited
+ * Copyright (C) 2013 - 2014 Persado
  * %%
  * Copyright (c) Persado Intellectual Property Limited. All rights reserved.
  *  
@@ -36,37 +36,32 @@ package com.persado.oss.quality.stevia.selenium.core;
  * #L%
  */
 
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.IOException;
+import java.util.List;
 
-/**
- * Created by manoskousteris on 12/8/16.
- */
-public class CustomExpectedCondition {
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-    /**
-     * The Constant LOG.
-     */
-    private static final Logger conditionsLogger = LoggerFactory.getLogger(CustomExpectedCondition.class);
+public class HttpClientTest {
+	
+	@Test
+	public void testHttpClient() throws IOException, InterruptedException {
+		
+		// we enable redirects
+		System.setProperty("httpclient.followredirects", "true");
 
-    public static ExpectedCondition<Boolean> elementHasStoppedMoving(final WebElement element) {
-        return new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                Point initialLocation = element.getLocation();
-                try {
-                    Thread.sleep(50);
-                }catch (InterruptedException e){
-                    conditionsLogger.error(e.getMessage());
-                }
-                Point finalLocation = element.getLocation();
-                return initialLocation.equals(finalLocation);
-            }
-        };
-    }
+		
+		SteviaHttpClient client = new SteviaHttpClient();
+		List<HttpResponse> list = client.get("http://www.google.com", 2);
+		Assert.assertNotNull(list, "list cannot be null");
+		Assert.assertTrue(list.size() == 2, " list should have 2 elements ");
+		
+		Assert.assertNotNull(list.get(0).getBody(), "body cannot be null");
+		Assert.assertEquals(list.get(0).getStatus(), 200);
+		
+		System.out.println("\n\nStatus="+list.get(0).getStatus()+"\n\n"+list.get(0).getBody());
+		
+		
+	}
+
 }
