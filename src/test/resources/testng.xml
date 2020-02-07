@@ -19,11 +19,11 @@
 	</listeners>
 
 
-	<test name="Test Google Search using Firefox Web Driver" preserve-order="true">
-        <classes>
-			<class name="com.persado.oss.quality.stevia.tests.TestGoogleSearch" />
-		</classes>
-	</test>
+<!-- 	<test name="Test Google Search using Firefox Web Driver" preserve-order="true"> -->
+<!--         <classes> -->
+<!-- 			<class name="com.persado.oss.quality.stevia.tests.TestGoogleSearch" /> -->
+<!-- 		</classes> -->
+<!-- 	</test> -->
  <!--	
  
 	<test name="Test Google Search using Chrome Web Driver" preserve-order="true">
