@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.persado.oss.quality.stevia</groupId>
 	<artifactId>stevia-core</artifactId>
-	<version>0.9.23-SNAPSHOT</version>
+	<version>0.9.23</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -53,7 +53,7 @@
 		<connection>scm:git:git://github.com/dexecutor/dependent-tasks-executor.git</connection>
 		<developerConnection>scm:git:git@github.com:dexecutor/dexecutor.git</developerConnection>
 		<url>https://github.com/dexecutor/dependent-tasks-executor</url>
-		<tag>stevia-core-0.9.23</tag>
+		<tag>0.9.23</tag>
 	</scm>
 	<!-- -->
 	<distributionManagement>
@@ -132,7 +132,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>3.0.1</version>
+					<version>3.1.1</version>
 					<executions>
 						<execution>
 							<id>attach-sources</id>
@@ -145,14 +145,13 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
-					<version>2.10.4</version>
+					<version>3.1.1</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
 					</configuration>
 					<executions>
 						<execution>
-							<id>attach-javadoc</id>
-							<!-- <goals></goals> -->
+							<id>attach-javadoc</id>							
 						</execution>
 					</executions>
 				</plugin>
