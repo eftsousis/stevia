@@ -85,7 +85,7 @@ public class SteviaHttpClient implements HttpConstants {
 	 * @return the a list of HTTP Responses
 	 * @throws IOException, InterruptedException 
 	 */
-	public List<HttpResponse> get(String url, int numberOfTimes) throws IOException, InterruptedException {
+	public ArrayList<HttpResponse> get(String url, int numberOfTimes) throws IOException, InterruptedException {
 		return get(url,numberOfTimes,null);
 	}
 	
@@ -98,11 +98,11 @@ public class SteviaHttpClient implements HttpConstants {
 	 * @return the a list of HTTP Responses
 	 * @throws IOException, InterruptedException 
 	 */
-	public List<HttpResponse> get(String url, int numberOfTimes, List<HttpCookie> cookies) throws IOException, InterruptedException {
+	public ArrayList<HttpResponse> get(String url, int numberOfTimes, List<HttpCookie> cookies) throws IOException, InterruptedException {
 		Assert.hasLength(url, "URL cannot be null");
 		Assert.isTrue(numberOfTimes > 0, "numberOfTimes cannot be 0");
 		
-		List<HttpResponse> responses = new ArrayList<HttpResponse>(numberOfTimes);
+		ArrayList<HttpResponse> responses = new ArrayList<HttpResponse>(numberOfTimes);
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();

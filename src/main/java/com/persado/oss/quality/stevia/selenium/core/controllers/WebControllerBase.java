@@ -220,7 +220,7 @@ public abstract class WebControllerBase implements WebController {
 	public void pressAndSwitchToNewWindow(String locator) {
 		int windowsBefore = getWindowHandles().size();
 		press(locator);
-		waitForNewWindow(windowsBefore, SteviaContext.getWaitForNewWindow());
+		waitForNewWindow(windowsBefore, SteviaContext.getWaitForElement());
 		switchToLatestWindow();
 	}
 

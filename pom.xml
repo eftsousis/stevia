@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.persado.oss.quality.stevia</groupId>
 	<artifactId>stevia-core</artifactId>
-	<version>0.9.22-SNAPSHOT</version>
+	<version>0.9.23-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -51,25 +52,21 @@
 		<url>https://github.com/persado/stevia/issues</url>
 	</issueManagement>
 	<scm>
-		<url>https://github.com/persado/stevia</url>
-		<connection>scm:git:git@github.com:persado/stevia.git</connection>
-		<developerConnection>scm:git:git@github.com:persado/stevia.git</developerConnection>
+		<connection>scm:git:git://github.com/dexecutor/dependent-tasks-executor.git</connection>
+		<developerConnection>scm:git:git@github.com:dexecutor/dexecutor.git</developerConnection>
+		<url>https://github.com/dexecutor/dependent-tasks-executor</url>
 		<tag>HEAD</tag>
 	</scm>
 	<!-- -->
 	<distributionManagement>
-		<repository>
-			<id>sonatype-nexus-releases</id>
-			<name>OSS Sonatype Release Staging Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
-
 		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>OSS Sonatype Snapshot Repository</name>
+			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 
 	<build>
@@ -109,6 +106,57 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.5.3</version>
+					<configuration>
+						<localCheckout>true</localCheckout>
+						<pushChanges>false</pushChanges>
+						<mavenExecutorId>forked-path</mavenExecutorId>
+						<!-- <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments> -->
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>1.9.5</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.7</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.0.1</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.10.4</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+					<executions>
+						<execution>
+							<id>attach-javadoc</id>
+							<!-- <goals></goals> -->
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -171,20 +219,9 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
-        			<groupId>org.apache.maven.plugins</groupId>
-        			<artifactId>maven-gpg-plugin</artifactId>
-        			<version>1.6</version>
-        			<executions>
-          			<execution>
-            				<id>sign-artifacts</id>
-            				<phase>verify</phase>
-            				<goals>
-              					<goal>sign</goal>
-            				</goals>
-          			</execution>
-        			</executions>
-      			</plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-gpg-plugin</artifactId> 
+				<version>1.6</version> <executions> <execution> <id>sign-artifacts</id> <phase>verify</phase> 
+				<goals> <goal>sign</goal> </goals> </execution> </executions> </plugin> -->
 		</plugins>
 	</build>
 
@@ -206,8 +243,20 @@
 			<artifactId>xsoup</artifactId>
 			<version>0.3.0</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>7.3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
 
-	
+
 
 		<!-- Suite of Java SSH applications providing a Java SSH API, SSH Terminal, 
 			SSH secured VNC client, SFTP client and SSH Daemon -->
@@ -253,8 +302,8 @@
 
 		<!-- Selenium Server Standalone -->
 		<dependency>
-        	<groupId>org.seleniumhq.selenium</groupId>
-        	<artifactId>selenium-java</artifactId>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
 		<dependency>
@@ -276,7 +325,7 @@
 
 		<!-- Core utilities used by other modules. -->
 		<dependency>
-                <groupId>org.springframework</groupId>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
@@ -429,14 +478,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<profiles>
-    		<profile>
-        		<id>disable-java8-doclint</id>
-        		<activation>
-            			<jdk>[1.8,)</jdk>
-        		</activation>
-        		<properties>
-            			<additionalparam>-Xdoclint:none</additionalparam>
-        		</properties>
-    		</profile>
+		<profile>
+			<id>disable-java8-doclint</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<additionalparam>-Xdoclint:none</additionalparam>
+			</properties>
+		</profile>
 	</profiles>
 </project>

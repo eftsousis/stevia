@@ -47,6 +47,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -1638,5 +1639,233 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 			allCookies.add(new HttpCookie(c.getName(), c.getValue()));			
 		}
 		return allCookies;
+	}
+
+	@Override
+	public void clearStorage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void waitForElementToStopMoving(String locator, long waitSeconds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void waitForElementToBeClickable(String locator, long waitSeconds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void waitForElementToStopMoving(String locator) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void takeScreenShot(File destDir, String desiredName) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isAlertPresent(long seconds) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isInputChecked(String locator) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void navigateBack() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void navigateForward() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void waitForPageToLoad(long waitSeconds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pressAndWaitForAjaxComplete(String locator) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pressLinkNameAndWaitForAjaxComplete(String linkName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pressElementWithJS(String locator) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void inputWithJS(String locator, String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollToTop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollToBottom() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollTo(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void openNewWindow(String url) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void openNewWindow() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setWindowSize(Dimension dim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToFrame(String frameId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToFrameByLocator(String frameId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Set<String> getWindowHandles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getWindowHandle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void switchToWindow(String windowHandle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void switchToActiveElement() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void selectFrame(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void tap(String locator) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tap(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tap(WebElement el) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tapWithJS(String locator, boolean waitForAjax) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollTo(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollToExact(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void swipe(int startX, int startY, int endX, int endY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void swipe(int startX, int startY, int endX, int endY, int duration) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public WebElement findChildElement(WebElement parent, String childLocator) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<WebElement> findAllChildElements(WebElement parent, String childLocator) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
