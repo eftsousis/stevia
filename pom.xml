@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.eftsousis.stevia</groupId>
 	<artifactId>stevia-core</artifactId>
-	<version>0.9.24-SNAPSHOT</version>
+	<version>0.9.25-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -53,7 +53,7 @@
 		<connection>scm:git:git://github.com/dexecutor/dependent-tasks-executor.git</connection>
 		<developerConnection>scm:git:git@github.com:dexecutor/dexecutor.git</developerConnection>
 		<url>https://github.com/dexecutor/dependent-tasks-executor</url>
-		<tag>stevia-core-0.9.24-SNAPSHOT</tag>
+		<tag>stevia-core-0.9.245-SNAPSHOT</tag>
 	</scm>
 	<!-- -->
 	<distributionManagement>
