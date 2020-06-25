@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.eftsousis.stevia</groupId>
 	<artifactId>stevia-core</artifactId>
-	<version>0.9.23</version>
+	<version>0.9.23-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -53,7 +53,7 @@
 		<connection>scm:git:git://github.com/dexecutor/dependent-tasks-executor.git</connection>
 		<developerConnection>scm:git:git@github.com:dexecutor/dexecutor.git</developerConnection>
 		<url>https://github.com/dexecutor/dependent-tasks-executor</url>
-		<tag>stevia-core-0.9.23</tag>
+		<tag>stevia-core-0.9.23-SNAPSHOT</tag>
 	</scm>
 	<!-- -->
 	<distributionManagement>
@@ -81,7 +81,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.6.1</version>
+					<version>3.8.0</version>
 					<inherited>true</inherited>
 					<configuration>
 						<source>1.8</source>
@@ -475,6 +475,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 	</properties>
+	
 	<profiles>
 		<profile>
 			<id>disable-java8-doclint</id>
@@ -515,4 +516,5 @@
 			</build>
 		</profile>
 	</profiles>
+	
 </project>
