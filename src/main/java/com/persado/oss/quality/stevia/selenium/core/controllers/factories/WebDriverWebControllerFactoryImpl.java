@@ -38,100 +38,105 @@ package com.persado.oss.quality.stevia.selenium.core.controllers.factories;
 
 import com.persado.oss.quality.stevia.selenium.core.SteviaContext;
 import com.persado.oss.quality.stevia.selenium.core.WebController;
-import com.persado.oss.quality.stevia.selenium.core.controllers.SteviaWebControllerFactory;
 import com.persado.oss.quality.stevia.selenium.core.controllers.WebDriverWebController;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebDriverWebControllerFactoryImpl implements WebControllerFactory {
-    private static final Logger LOG = LoggerFactory.getLogger(WebDriverWebControllerFactoryImpl.class);
-    @Override
-    public WebController initialize(ApplicationContext context, WebController controller) {
-        WebDriverWebController wdController = (WebDriverWebController) controller;
-        WebDriver driver = null;
-        /**
-         * Capabilities are now fetched from Stevia Context.
-         * Capabilities are stored in Stevia Context inside qa-tests project
-         * using the overriden testInitialisation in WorkableTestBase
-         */
+	  private static final Logger LOG = LoggerFactory.getLogger(WebDriverWebControllerFactoryImpl.class);
 
-        Capabilities capabilities = SteviaContext.getCapabilities();
+	  public WebController initialize(ApplicationContext context, WebController controller) {
+	    WebDriverWebController wdController = (WebDriverWebController)controller;
+	    WebDriver driver = null;
+	    if (SteviaContext.getParam("debugging").compareTo("true") == 0) {
+	      if (SteviaContext.getParam("browser") == null || SteviaContext.getParam("browser").compareTo("firefox") == 0 || SteviaContext.getParam("browser").isEmpty()) {
+	        LOG.info("Debug enabled, using Firefox Driver");
+	        FirefoxDriver firefoxDriver = new FirefoxDriver();
+	      } else if (SteviaContext.getParam("browser").compareTo("chrome") == 0) {
+	        LOG.info("Debug enabled, using ChromeDriver");
+	        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+	        ChromeOptions options = new ChromeOptions();
+	        options.addArguments(new String[] { "start-maximized" });
+	        options.addArguments(new String[] { "test-type" });
+	        if (SteviaContext.getParam("headless").compareTo("true") == 0) {
+	          LOG.info("*** Chrome is running headless.. ***");
+	          options.addArguments(new String[] { "headless" });
+	          options.addArguments(new String[] { "silent" });
+	          options.addArguments(new String[] { "window-size=1920,1200" });
+	        } 
+	        Map<String, Object> chromePrefs = new HashMap<>();
+	        chromePrefs.put("download.default_directory", System.getProperty("user.dir") + File.separator + "target");
+	        options.setExperimentalOption("prefs", chromePrefs);
+	        capabilities.setCapability("goog:chromeOptions", options);
+	        options.merge((Capabilities)capabilities);
+	        ChromeDriver chromedriver = new ChromeDriver(options);
+	        driver = chromedriver;
+	      } else if (SteviaContext.getParam("browser").compareTo("iexplorer") == 0) {
+	        LOG.info("Debug enabled, using InternetExplorerDriver");
+	        InternetExplorerDriver internetExplorerDriver = new InternetExplorerDriver();
+	      } else if (SteviaContext.getParam("browser").compareTo("safari") == 0) {
+	        LOG.info("Debug enabled, using SafariDriver");
+	        SafariDriver safariDriver = new SafariDriver();
+	      } else {
+	        throw new IllegalArgumentException("Wrong value for 'browser' parameter was defined");
+	      } 
+	    } else {
+	      DesiredCapabilities capability = new DesiredCapabilities();
+	      if (SteviaContext.getParam("browser") == null || SteviaContext.getParam("browser").compareTo("firefox") == 0 || SteviaContext.getParam("browser").isEmpty()) {
+	        LOG.info("Debug OFF, using a RemoteWebDriver with Firefox capabilities");
+	        capability = DesiredCapabilities.firefox();
+	      } else if (SteviaContext.getParam("browser").compareTo("chrome") == 0) {
+	        LOG.info("Debug OFF, using a RemoteWebDriver with Chrome capabilities");
+	        capability = DesiredCapabilities.chrome();
+	        ChromeOptions options = new ChromeOptions();
+	        options.addArguments(new String[] { "start-maximized" });
+	        options.addArguments(new String[] { "test-type" });
+	        capability.setCapability("goog:chromeOptions", options);
+	      } else if (SteviaContext.getParam("browser").compareTo("iexplorer") == 0) {
+	        LOG.info("Debug OFF, using a RemoteWebDriver with Internet Explorer capabilities");
+	        capability = DesiredCapabilities.internetExplorer();
+	      } else if (SteviaContext.getParam("browser").compareTo("safari") == 0) {
+	        LOG.info("Debug OFF, using a RemoteWebDriver with Safari capabilities");
+	        capability = DesiredCapabilities.safari();
+	      } else if (SteviaContext.getParam("browser").compareTo("opera") == 0) {
+	        LOG.info("Debug OFF, using a RemoteWebDriver with Opera capabilities");
+	        capability = DesiredCapabilities.opera();
+	      } else {
+	        throw new IllegalArgumentException("Wrong value for 'browser' parameter was defined");
+	      } 
+	      Augmenter augmenter = new Augmenter();
+	      try {
+	        driver = augmenter.augment((WebDriver)new RemoteWebDriver(new URL("http://" + SteviaContext.getParam("rcHost") + ":" + SteviaContext.getParam("rcPort") + "/wd/hub"), (Capabilities)capability));
+	      } catch (MalformedURLException e) {
+	        throw new IllegalArgumentException(e.getMessage(), e);
+	      } 
+	    } 
+	    if (SteviaContext.getParam("targetHostUrl") != null)
+	      driver.get(SteviaContext.getParam("targetHostUrl")); 
+	    wdController.setDriver(driver);
+	    if (SteviaContext.getParam("actionsLogging").compareTo("true") == 0)
+	      wdController.enableActionsLogging(); 
+	    return (WebController)wdController;
+	  }
 
-        // Handle type of webdriver based on "remote" param
-        System.out.println("Initializing web driver with capabilities:" + SteviaContext.getCapabilities());
-        if (SteviaContext.getParam("remote").compareTo(SteviaWebControllerFactory.TRUE) == 0) {
-            final String wdHost = SteviaContext.getParam("rcUrl");
-            CompletableFuture<WebDriver> wd = CompletableFuture.supplyAsync(() -> getRemoteWebDriver(wdHost, capabilities));
-            try {
-                driver = wd.get(Integer.valueOf(SteviaContext.getParam("nodeTimeout")), TimeUnit.MINUTES);
-            } catch (InterruptedException | ExecutionException e) {
-                LOG.error(e.getMessage());
-            } catch (TimeoutException e) {
-                throw new RuntimeException("Timeout of " + Integer.valueOf(SteviaContext.getParam("nodeTimeout")) + " minutes reached waiting for a hub node to receive the request");
-            }
-            ((RemoteWebDriver) driver).setFileDetector(new LocalFileDetector());
-        } else {
-            driver = getLocalDriver(capabilities);
-        }
-
-        //Navigate to the desired target host url
-        if (SteviaContext.getParam(SteviaWebControllerFactory.TARGET_HOST_URL) != null) {
-            driver.get(SteviaContext.getParam(SteviaWebControllerFactory.TARGET_HOST_URL));
-        }
-
-        wdController.setDriver(driver);
-
-        // Enable web driver actions logging
-        if (SteviaContext.getParam(SteviaWebControllerFactory.ACTIONS_LOGGING).compareTo(SteviaWebControllerFactory.TRUE) == 0) {
-            wdController.enableActionsLogging();
-        }
-        return wdController;
-    }
-
-    @Override
-    public String getBeanName() {
-        return "webDriverController";
-    }
-
-    private WebDriver getRemoteWebDriver(String rcUrl, Capabilities desiredCapabilities) {
-        WebDriver driver;
-        Augmenter augmenter = new Augmenter(); // adds screenshot capability to a default webdriver.
-        try {
-            driver = augmenter.augment(new RemoteWebDriver(new URL(rcUrl), desiredCapabilities));
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(e.getMessage(), e);
-        }
-        return driver;
-    }
-
-    private WebDriver getLocalDriver(Capabilities capabilities) {
-        WebDriver driver;
-        String browser = capabilities.getBrowserName();
-        switch (browser) {
-            case "chrome":
-                driver = new ChromeDriver(capabilities);
-                break;
-            case "firefox":
-                driver = new FirefoxDriver(capabilities);
-                break;
-            default:
-                throw new IllegalStateException("Browser requested is invalid");
-        }
-        return driver;
-    }
-}
+	  public String getBeanName() {
+	    return "webDriverController";
+	  }
+	}
