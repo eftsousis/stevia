@@ -36,7 +36,6 @@ package com.persado.oss.quality.stevia.selenium.core.controllers;
  * #L%
  */
 
-
 import com.persado.oss.quality.stevia.network.http.HttpCookie;
 import com.persado.oss.quality.stevia.selenium.core.SteviaContext;
 import com.persado.oss.quality.stevia.selenium.core.WebController;
@@ -74,7 +73,6 @@ import java.util.Set;
 //import com.thoughtworks.selenium.Selenium;
 //import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class WebDriverMethods.
@@ -86,28 +84,28 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 
 	/** The driver. */
 	private WebDriver driver;
-	
+
 	/** The Constant TO_MILLIS. */
 	private static final int TO_MILLIS = 1000;
-	
+
 	/** The Constant THREAD_SLEEP. */
 	private static final long THREAD_SLEEP = 100;
-	
+
 	/** The Constant XPATH. */
 	private static final String XPATH = "xpath";
-	
+
 	/** The Constant CSS. */
 	private static final String CSS = "css";
-	
+
 	/** The Constant NAME. */
 	private static final String NAME = "name";
-	
+
 	/** The Constant LINK. */
 	private static final String LINK = "link";
-	
+
 	/** The Constant ID. */
 	private static final String ID = "id";
-	
+
 	/**
 	 * Gets the driver.
 	 * 
@@ -120,8 +118,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Sets the driver.
 	 * 
-	 * @param driver
-	 *            the new driver
+	 * @param driver the new driver
 	 */
 	public void setDriver(WebDriver driver) {
 		this.driver = driver;
@@ -130,13 +127,12 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Gets the selenium instance.
 	 * 
-	 * @param //baseUrl
-	 *            the base url
+	 * @param //baseUrl the base url
 	 * @return the selenium instance
 	 */
-	//public Selenium getSeleniumInstance(String baseUrl) {
-	//	return new WebDriverBackedSelenium(driver, baseUrl);
-	//}
+	// public Selenium getSeleniumInstance(String baseUrl) {
+	// return new WebDriverBackedSelenium(driver, baseUrl);
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -206,15 +202,14 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 * @param locator the element locator
 	 * @return the string after the character '='
 	 */
-	private String findLocatorSubstring(String locator){
-		return locator.substring(locator.indexOf('=')+1);
+	private String findLocatorSubstring(String locator) {
+		return locator.substring(locator.indexOf('=') + 1);
 	}
-	
+
 	/**
 	 * Determine locator.
 	 * 
-	 * @param locator
-	 *            the locator
+	 * @param locator the locator
 	 * @return the by
 	 */
 	public By determineLocator(String locator) {
@@ -230,8 +225,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 			return By.linkText(findLocatorSubstring(locator));
 		} else if (locator.startsWith(ID)) {
 			return By.id(findLocatorSubstring(locator));
-		}
-		else {
+		} else {
 			return By.id(locator);
 		}
 	}
@@ -257,7 +251,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 */
 	@Override
 	public WebElement waitForElement(String locator, long waitSeconds) {
-		WebDriverWait wait = new WebDriverWait(driver, waitSeconds,THREAD_SLEEP);
+		WebDriverWait wait = new WebDriverWait(driver, waitSeconds, THREAD_SLEEP);
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(determineLocator(locator)));
 	}
 
@@ -304,28 +298,26 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 */
 
 	public WebElement waitForElementPresence(String locator, long waitSeconds) {
-		WebDriverWait wait = new WebDriverWait(driver, waitSeconds,THREAD_SLEEP);
+		WebDriverWait wait = new WebDriverWait(driver, waitSeconds, THREAD_SLEEP);
 		return wait.until(ExpectedConditions.presenceOfElementLocated(determineLocator(locator)));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#findElements
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#findElements
 	 * (org.openqa.selenium.String)
 	 */
 	@Override
 	public List<WebElement> findElements(String locator) {
-		WebDriverWait wait = new WebDriverWait(driver, SteviaContext.getWaitForElement(),THREAD_SLEEP);
+		WebDriverWait wait = new WebDriverWait(driver, SteviaContext.getWaitForElement(), THREAD_SLEEP);
 		return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(determineLocator(locator)));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#input(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#input(
 	 * org.openqa.selenium.String, java.lang.String)
 	 */
 	@Override
@@ -338,8 +330,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#press(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#press(
 	 * org.openqa.selenium.String)
 	 */
 	@Override
@@ -353,9 +344,37 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#
 	 * pressAndWaitForPageToLoad(java.lang.String)
 	 */
+//	@Override
+//	public void pressAndWaitForPageToLoad(String locator) {
+//		press(locator);
+//	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#
+	 * pressAndWaitForPageToLoad(java.lang.String)
+	 */
 	@Override
 	public void pressAndWaitForPageToLoad(String locator) {
 		press(locator);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		boolean conditionResult;
+		long startTime = System.currentTimeMillis();
+		do {
+			conditionResult = isloadComplete();
+			try {
+				Thread.sleep(THREAD_SLEEP);
+			} catch (InterruptedException e) {
+				WEBDRIVER_LOG.error(e.getMessage());
+			}
+			
+		} while (!conditionResult && System.currentTimeMillis() - startTime <= SteviaContext.getWaitForElement() * TO_MILLIS);
+	}
+
+	private boolean isloadComplete() {
+		return ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("loaded")
+				|| ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
 	}
 
 	/*
@@ -420,8 +439,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Gets the select object.
 	 * 
-	 * @param locator
-	 *            the locator
+	 * @param locator the locator
 	 * @return the select object
 	 */
 	public Select getSelectObject(String locator) {
@@ -432,8 +450,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#select
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#select
 	 * (org.openqa.selenium.String, java.lang.String)
 	 */
 	@Override
@@ -444,8 +461,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#selectByValue
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#selectByValue
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -468,8 +484,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#clear(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#clear(
 	 * org.openqa.selenium.String, java.lang.String)
 	 */
 	@Override
@@ -482,9 +497,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getBuilder
-	 * ()
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getBuilder ()
 	 */
 	@Override
 	public Actions getBuilder() {
@@ -494,8 +507,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#hover(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#hover(
 	 * org.openqa.selenium.String)
 	 */
 	@Override
@@ -506,8 +518,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#mouseUp
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#mouseUp
 	 * (java.lang.String)
 	 */
 	@Override
@@ -518,8 +529,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#mouseDown
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#mouseDown
 	 * (java.lang.String)
 	 */
 	@Override
@@ -530,8 +540,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#doubleClick
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#doubleClick
 	 * (org.openqa.selenium.String)
 	 */
 	@Override
@@ -542,8 +551,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#click(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#click(
 	 * java.lang.String)
 	 */
 	public void click(String locator) {
@@ -553,8 +561,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#typeKeys
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#typeKeys
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -565,8 +572,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#keyDown
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#keyDown
 	 * (java.lang.String, org.openqa.selenium.Keys)
 	 */
 	@Override
@@ -578,8 +584,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#keyUp(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#keyUp(
 	 * java.lang.String, org.openqa.selenium.Keys)
 	 */
 	@Override
@@ -590,8 +595,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#keyDown
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#keyDown
 	 * (org.openqa.selenium.Keys)
 	 */
 	@Override
@@ -602,8 +606,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#keyUp(
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#keyUp(
 	 * org.openqa.selenium.Keys)
 	 */
 	@Override
@@ -614,8 +617,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#keyPress
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#keyPress
 	 * (org.openqa.selenium.Keys)
 	 */
 	@Override
@@ -626,8 +628,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#keyPress
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#keyPress
 	 * (java.lang.String, org.openqa.selenium.Keys)
 	 */
 	@Override
@@ -639,8 +640,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Highlight.
 	 * 
-	 * @param element
-	 *            the element
+	 * @param element the element
 	 */
 	public void highlight(WebElement element) {
 		executeJavascript("arguments[0].style.backgroundColor = 'rgb(255, 255, 0)'", element);
@@ -649,8 +649,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#highlight
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#highlight
 	 * (org.openqa.selenium.String)
 	 */
 	@Override
@@ -661,8 +660,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#highlight
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#highlight
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -698,8 +696,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getText
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getText
 	 * (org.openqa.selenium.String)
 	 */
 	@Override
@@ -710,8 +707,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getFocus
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getFocus
 	 * (java.lang.String)
 	 */
 	@Override
@@ -757,8 +753,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getInputValue
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getInputValue
 	 * (org.openqa.selenium.String)
 	 */
 	@Override
@@ -770,8 +765,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#isAlertPresent
-	 * ()
+	 * com.persado.oss.quality.stevia.selenium.core.WebController#isAlertPresent ()
 	 */
 	@Override
 	public boolean isAlertPresent() {
@@ -787,8 +781,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#isTextPresent
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#isTextPresent
 	 * (java.lang.String)
 	 */
 	@Override
@@ -810,14 +803,13 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#refresh()
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#refresh()
 	 */
 	@Override
 	public String getPageSource() {
 		return driver.getPageSource();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -987,8 +979,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#clickOkInAlert
-	 * ()
+	 * com.persado.oss.quality.stevia.selenium.core.WebController#clickOkInAlert ()
 	 */
 	public void clickOkInAlert() {
 
@@ -1009,8 +1000,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Gets the full xpath.
 	 * 
-	 * @param locator
-	 *            the locator
+	 * @param locator the locator
 	 * @return the full xpath
 	 */
 	public String getFullXpath(String locator) {
@@ -1022,8 +1012,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Gets the full xpath.
 	 * 
-	 * @param element
-	 *            the Webelement
+	 * @param element the Webelement
 	 * @return the full xpath
 	 */
 	public String getFullXpath(WebElement element) {
@@ -1034,10 +1023,8 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/**
 	 * Gets the table header position.
 	 * 
-	 * @param locator
-	 *            the locator
-	 * @param headerName
-	 *            the header name
+	 * @param locator    the locator
+	 * @param headerName the header name
 	 * @return the table header position
 	 */
 	public String getTableHeaderPosition(String locator, String headerName) {
@@ -1058,30 +1045,33 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 		throw new WebDriverException("Header name not Found");
 	}
 
-	/* (non-Javadoc)
-	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getTableElementColumnPosition(java.lang.String, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#
+	 * getTableElementColumnPosition(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String getTableElementColumnPosition(String locator,	String elementName) {
+	public String getTableElementColumnPosition(String locator, String elementName) {
 		List<WebElement> tableRows = null;
 		List<WebElement> tableColumnsPerRow = null;
 		WebElement element = waitForElement(locator);
 		tableRows = element.findElements(By.cssSelector("tbody tr"));
-     
+
 		int position = 1;
 		for (WebElement row : tableRows) {
 			tableColumnsPerRow = row.findElements(By.cssSelector("td"));
-			for (WebElement column:tableColumnsPerRow){	
-			if (column.getText().equals(elementName)) {
-				return String.valueOf(position);
-			 }
-			 position++;
+			for (WebElement column : tableColumnsPerRow) {
+				if (column.getText().equals(elementName)) {
+					return String.valueOf(position);
+				}
+				position++;
 			}
 			position = 1;
 		}
 		throw new WebDriverException("Column name not Found");
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1117,26 +1107,34 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 */
 	public String getTableElementTextUnderHeader(String locator, String elementName, String headerName) {
 		WebElement element = waitForElement(locator);
-		return element.findElement(By.cssSelector("tbody tr:nth-child(" + getTableElementRowPosition(locator, elementName) + ") td:nth-child(" + getTableHeaderPosition(locator, headerName) + ")"))
+		return element
+				.findElement(By.cssSelector("tbody tr:nth-child(" + getTableElementRowPosition(locator, elementName)
+						+ ") td:nth-child(" + getTableHeaderPosition(locator, headerName) + ")"))
 				.getText();
 
 	}
 
-    /* (non-Javadoc)
-     * @see com.persado.oss.quality.stevia.selenium.core.WebController#getTableRecordsUnderHeader(java.lang.String, java.lang.String)
-     */
-    public List<String> getTableRecordsUnderHeader(String locator,String headerName) {		
-		List<String> records = new ArrayList<String>(); 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#
+	 * getTableRecordsUnderHeader(java.lang.String, java.lang.String)
+	 */
+	public List<String> getTableRecordsUnderHeader(String locator, String headerName) {
+		List<String> records = new ArrayList<String>();
 		WebElement element = waitForElement(locator);
-		String headerPosition = getTableHeaderPosition(locator,headerName);	
-		List<WebElement> rows = element.findElements(By.cssSelector("tbody tr")); 
-		for(WebElement row:rows){
-			records.add(row.findElement(By.cssSelector("th:nth-child("+ headerPosition + "),td:nth-child("+ headerPosition + ")")).getText());
+		String headerPosition = getTableHeaderPosition(locator, headerName);
+		List<WebElement> rows = element.findElements(By.cssSelector("tbody tr"));
+		for (WebElement row : rows) {
+			records.add(row
+					.findElement(
+							By.cssSelector("th:nth-child(" + headerPosition + "),td:nth-child(" + headerPosition + ")"))
+					.getText());
 		}
-        return records;
-		
+		return records;
+
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1174,26 +1172,29 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 
 		return table;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getTableInfoAsList(java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.persado.oss.quality.stevia.selenium.core.WebController#getTableInfoAsList
+	 * (java.lang.String)
 	 */
 	@Override
 	public List<List<String>> getTableInfoAsList(String locator) {
 		WebElement table = waitForElement(locator);
 		List<List<String>> tableInfo = new ArrayList<List<String>>();
 		List<WebElement> tableRows = table.findElements(By.cssSelector("tbody tr"));
-		for (WebElement row:tableRows){
+		for (WebElement row : tableRows) {
 			List<String> rowText = new ArrayList<String>();
 			List<WebElement> columnsPerRow = row.findElements(By.cssSelector("td"));
-			for(WebElement column:columnsPerRow){
+			for (WebElement column : columnsPerRow) {
 				rowText.add(column.getText());
 			}
 			tableInfo.add(rowText);
 		}
 		return tableInfo;
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -1205,15 +1206,19 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	@Override
 	public String getTableElementSpecificHeaderLocator(String locator, String elementName, String headerName) {
 		if (locator.startsWith(XPATH)) {
-			return "//" + findLocatorSubstring(locator)+ "//tr[" + getTableElementRowPosition(locator, elementName) + "]//td[" + getTableHeaderPosition(locator, headerName) + "]";
+			return "//" + findLocatorSubstring(locator) + "//tr[" + getTableElementRowPosition(locator, elementName)
+					+ "]//td[" + getTableHeaderPosition(locator, headerName) + "]";
 		} else if (locator.startsWith("//")) {
-			return locator + "//tr[" + getTableElementRowPosition(locator, elementName) + "]//td[" + getTableHeaderPosition(locator, headerName) + "]";
+			return locator + "//tr[" + getTableElementRowPosition(locator, elementName) + "]//td["
+					+ getTableHeaderPosition(locator, headerName) + "]";
 		}
 
 		else if (locator.startsWith(CSS)) {
-			return locator + " tr:nth-child(" + getTableElementRowPosition(locator, elementName) + ") td:nth-child(" + getTableHeaderPosition(locator, headerName) + ")";
+			return locator + " tr:nth-child(" + getTableElementRowPosition(locator, elementName) + ") td:nth-child("
+					+ getTableHeaderPosition(locator, headerName) + ")";
 		} else {
-			return "css=#" + locator + " tr:nth-child(" + getTableElementRowPosition(locator, elementName) + ") td:nth-child(" + getTableHeaderPosition(locator, headerName) + ")";
+			return "css=#" + locator + " tr:nth-child(" + getTableElementRowPosition(locator, elementName)
+					+ ") td:nth-child(" + getTableHeaderPosition(locator, headerName) + ")";
 		}
 	}
 
@@ -1242,8 +1247,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#navigate
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#navigate
 	 * (java.lang.String)
 	 */
 	public void navigate(String url) {
@@ -1254,8 +1258,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getCurrentUrl
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getCurrentUrl
 	 * ()
 	 */
 	public String getCurrentUrl() {
@@ -1265,8 +1268,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#close()
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#close()
 	 */
 	@Override
 	public void close() {
@@ -1276,8 +1278,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#quit()
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#quit()
 	 */
 	@Override
 	public void quit() {
@@ -1287,13 +1288,13 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#pressLinkName
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#pressLinkName
 	 * (java.lang.String)
 	 */
 	@Override
 	public void pressLinkName(String linkName) {
-		(new WebDriverWait(driver, SteviaContext.getWaitForElement())).until(ExpectedConditions.visibilityOfElementLocated((By.linkText(linkName)))).click();
+		(new WebDriverWait(driver, SteviaContext.getWaitForElement()))
+				.until(ExpectedConditions.visibilityOfElementLocated((By.linkText(linkName)))).click();
 
 	}
 
@@ -1371,8 +1372,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#dragAndDrop
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#dragAndDrop
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -1383,8 +1383,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#dragAndDrop
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#dragAndDrop
 	 * (java.lang.String, int, int)
 	 */
 	@Override
@@ -1428,8 +1427,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#selectFrame
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#selectFrame
 	 * (java.lang.String)
 	 */
 	@Override
@@ -1453,8 +1451,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#maximizeWindow
-	 * ()
+	 * com.persado.oss.quality.stevia.selenium.core.WebController#maximizeWindow ()
 	 */
 	public void maximizeWindow() {
 		driver.manage().window().maximize();
@@ -1474,8 +1471,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#moveToElement
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#moveToElement
 	 * (java.lang.String, int, int)
 	 */
 	@Override
@@ -1486,8 +1482,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#moveToElement
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#moveToElement
 	 * (java.lang.String)
 	 */
 	@Override
@@ -1498,8 +1493,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#moveByOffset
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#moveByOffset
 	 * (int, int)
 	 */
 	@Override
@@ -1510,8 +1504,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getAlertText
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getAlertText
 	 * ()
 	 */
 	@Override
@@ -1588,8 +1581,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#refresh()
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#refresh()
 	 */
 	@Override
 	public void refresh() {
@@ -1599,8 +1591,7 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * com.persado.oss.quality.stevia.selenium.core.WebController#getRowsNumber
+	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getRowsNumber
 	 * (java.lang.String)
 	 */
 	@Override
@@ -1619,24 +1610,31 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 		return waitForElement(locator).findElements(By.cssSelector("tbody tr:nth-child(1) td")).size();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getCookieByName(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.persado.oss.quality.stevia.selenium.core.WebController#getCookieByName(
+	 * java.lang.String)
 	 */
 	@Override
 	public HttpCookie getCookieByName(String name) {
 		return new HttpCookie(name, driver.manage().getCookieNamed(name).getValue());
 	}
 
-	/* (non-Javadoc)
-	 * @see com.persado.oss.quality.stevia.selenium.core.WebController#getAllCookies()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.persado.oss.quality.stevia.selenium.core.WebController#getAllCookies()
 	 */
 	@Override
 	public List<HttpCookie> getAllCookies() {
 		List<HttpCookie> allCookies = new ArrayList<HttpCookie>();
 		Iterator<Cookie> it = driver.manage().getCookies().iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			Cookie c = it.next();
-			allCookies.add(new HttpCookie(c.getName(), c.getValue()));			
+			allCookies.add(new HttpCookie(c.getName(), c.getValue()));
 		}
 		return allCookies;
 	}
@@ -1644,31 +1642,31 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	@Override
 	public void clearStorage() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void waitForElementToStopMoving(String locator, long waitSeconds) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void waitForElementToBeClickable(String locator, long waitSeconds) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void waitForElementToStopMoving(String locator) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void takeScreenShot(File destDir, String desiredName) throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -1685,92 +1683,117 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 
 	@Override
 	public void navigateBack() {
-		// TODO Auto-generated method stub
-		
+		driver.navigate().back();
 	}
 
 	@Override
 	public void navigateForward() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void waitForPageToLoad(long waitSeconds) {
-		// TODO Auto-generated method stub
-		
+		boolean conditionResult;
+		long startTime = System.currentTimeMillis();
+		do {
+			conditionResult = isloadComplete();
+			try {
+				Thread.sleep(THREAD_SLEEP);
+			} catch (InterruptedException e) {
+				WEBDRIVER_LOG.error(e.getMessage());
+			}
+			
+		} while (!conditionResult && System.currentTimeMillis() - startTime <= waitSeconds * TO_MILLIS);
+		WEBDRIVER_LOG.info("*** Page loaded ***");
+	}
+	
+	@Override
+	public void waitForPageToLoad() {
+		boolean conditionResult;
+		long startTime = System.currentTimeMillis();
+		do {
+			conditionResult = isloadComplete();
+			try {
+				Thread.sleep(THREAD_SLEEP);
+			} catch (InterruptedException e) {
+				WEBDRIVER_LOG.error(e.getMessage());
+			}
+			
+		} while (!conditionResult && System.currentTimeMillis() - startTime <= SteviaContext.getWaitForElement() * TO_MILLIS);
+		WEBDRIVER_LOG.info("*** Page loaded ***");
 	}
 
 	@Override
 	public void pressAndWaitForAjaxComplete(String locator) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pressLinkNameAndWaitForAjaxComplete(String linkName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pressElementWithJS(String locator) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void inputWithJS(String locator, String text) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void scrollToTop() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void scrollToBottom() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void scrollTo(int x, int y) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void openNewWindow(String url) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void openNewWindow() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setWindowSize(Dimension dim) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void switchToFrame(String frameId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void switchToFrameByLocator(String frameId) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -1788,19 +1811,19 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	@Override
 	public void switchToWindow(String windowHandle) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void switchToActiveElement() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void selectFrame(int index) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -1812,49 +1835,49 @@ public class WebDriverWebController extends WebControllerBase implements WebCont
 	@Override
 	public void tap(String locator) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void tap(int x, int y) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void tap(WebElement el) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void tapWithJS(String locator, boolean waitForAjax) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void scrollTo(String text) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void scrollToExact(String text) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void swipe(int startX, int startY, int endX, int endY) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void swipe(int startX, int startY, int endX, int endY, int duration) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

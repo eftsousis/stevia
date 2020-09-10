@@ -893,4 +893,10 @@ class VoidController implements WebController {
     public List<WebElement> findAllChildElements(WebElement parent, String childLocator) {
         return null;
     }
+
+	@Override
+	public void waitForPageToLoad() {
+		// TODO Auto-generated method stub
+		
+	}
 }
