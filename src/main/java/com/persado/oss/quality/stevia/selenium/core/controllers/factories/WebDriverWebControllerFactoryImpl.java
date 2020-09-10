@@ -71,15 +71,15 @@ public class WebDriverWebControllerFactoryImpl implements WebControllerFactory {
 	        FirefoxDriver firefoxDriver = new FirefoxDriver();
 	      } else if (SteviaContext.getParam("browser").compareTo("chrome") == 0) {
 	        LOG.info("Debug enabled, using ChromeDriver");
-	        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+	        DesiredCapabilities capabilities = DesiredCapabilities.chrome();	        
 	        ChromeOptions options = new ChromeOptions();
-	        options.addArguments(new String[] { "start-maximized" });
-	        options.addArguments(new String[] { "test-type" });
+	        options.addArguments("start-maximized");
+	        options.addArguments("test-type");
 	        if (SteviaContext.getParam("headless").compareTo("true") == 0) {
 	          LOG.info("*** Chrome is running headless.. ***");
-	          options.addArguments(new String[] { "headless" });
-	          options.addArguments(new String[] { "silent" });
-	          options.addArguments(new String[] { "window-size=1920,1200" });
+	          options.addArguments("headless");
+	          options.addArguments("silent");
+	          options.addArguments("window-size=1920,1200");
 	        } 
 	        Map<String, Object> chromePrefs = new HashMap<>();
 	        chromePrefs.put("download.default_directory", System.getProperty("user.dir") + File.separator + "target");

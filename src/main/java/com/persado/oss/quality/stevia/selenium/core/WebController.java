@@ -1210,4 +1210,6 @@ public interface WebController {
      */
     List<WebElement> findAllChildElements(WebElement parent, String childLocator);
 
+	void waitForPageToLoad();
+
 }
